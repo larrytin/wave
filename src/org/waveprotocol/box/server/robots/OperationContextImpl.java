@@ -41,6 +41,7 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
 import org.waveprotocol.wave.model.conversation.Conversation;
 import org.waveprotocol.wave.model.conversation.ConversationBlip;
+import org.waveprotocol.wave.model.conversation.ObservableConversation;
 import org.waveprotocol.wave.model.conversation.ObservableConversationView;
 import org.waveprotocol.wave.model.id.InvalidIdException;
 import org.waveprotocol.wave.model.id.WaveId;
@@ -226,7 +227,7 @@ public class OperationContextImpl implements OperationContext, OperationResults 
         } else {
           throw new InvalidRequestException("Wavelet " + waveletName + " couldn't be retrieved");
         }
-        
+
       } else {
         ObservableWaveletData obsWavelet = FACTORY.create(snapshot.snapshot);
         wavelet = new RobotWaveletData(obsWavelet, snapshot.committedVersion);
@@ -282,6 +283,12 @@ public class OperationContextImpl implements OperationContext, OperationResults 
     } catch (InvalidIdException e) {
       throw new InvalidRequestException("Invalid id", operation, e);
     }
+  }
+
+  @Override
+  public ObservableConversation openRootConversation(
+      OperationRequest operation, ParticipantId participant) throws InvalidRequestException {
+    return openConversation(operation, participant).getRoot();
   }
 
   // OperationResults implementation begins here

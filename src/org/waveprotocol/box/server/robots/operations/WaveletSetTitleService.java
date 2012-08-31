@@ -39,11 +39,11 @@ public class WaveletSetTitleService implements OperationService {
   public void execute(
       OperationRequest operation, OperationContext context, ParticipantId participant)
       throws InvalidRequestException {
-    
+
     String title =
         OperationUtil.getRequiredParameter(operation, ParamsProperty.WAVELET_TITLE);
     ObservableConversation conversation =
-        context.openConversation(operation, participant).getRoot();
+        context.openRootConversation(operation, participant);
     String blipId = conversation.getRootThread().getFirstBlip().getId();
     Document doc = context.getBlip(conversation, blipId).getContent();
     TitleHelper.setExplicitTitle(doc, title);

@@ -19,6 +19,7 @@ package org.waveprotocol.box.server.robots.passive;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.wave.api.Context;
@@ -44,6 +45,7 @@ import org.waveprotocol.wave.model.conversation.ConversationBlip;
 import org.waveprotocol.wave.model.conversation.ConversationListenerImpl;
 import org.waveprotocol.wave.model.conversation.ObservableConversation;
 import org.waveprotocol.wave.model.conversation.ObservableConversationBlip;
+import org.waveprotocol.wave.model.conversation.ObservableConversationView;
 import org.waveprotocol.wave.model.conversation.WaveletBasedConversation;
 import org.waveprotocol.wave.model.document.DocHandler;
 import org.waveprotocol.wave.model.document.ObservableDocument;
@@ -529,7 +531,15 @@ public class EventGenerator {
       return null;
     }
 
-    ObservableConversation conversation = conversationUtil.buildConversation(wavelet).getRoot();
+    ObservableConversationView convView = conversationUtil.buildConversation(wavelet);
+    ObservableConversation conversation = convView.getRoot();
+    if (conversation == null) {
+      // Walkaround has no root conversation, get the first one.
+      conversation = Iterables.getFirst(convView.getConversations(), null);
+      if (conversation == null) {
+        return null;
+      }
+    }
     if (conversation.getRootThread().getFirstBlip() == null) {
       // No root blip is present, this will cause Robot API code
       // to fail when resolving the context of events. This might be fixed later

@@ -51,7 +51,7 @@ public class FetchWaveService implements OperationService {
       throws InvalidRequestException {
     OpBasedWavelet wavelet = context.openWavelet(operation, participant);
     ObservableConversation conversation =
-        context.openConversation(operation, participant).getRoot();
+        context.openRootConversation(operation, participant);
 
     EventMessageBundle messages =
         mapWaveletToMessageBundle(context.getConverter(), participant, wavelet, conversation);

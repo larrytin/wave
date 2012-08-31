@@ -72,7 +72,7 @@ public class DocumentModifyService implements OperationService {
 
     OpBasedWavelet wavelet = context.openWavelet(operation, participant);
     ObservableConversation conversation =
-        context.openConversation(operation, participant).getRoot();
+        context.openRootConversation(operation, participant);
     Document doc = context.getBlip(conversation, blipId).getContent();
 
     ApiView view = new ApiView(doc, wavelet);

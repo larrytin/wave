@@ -137,7 +137,7 @@ public class EditToolbar {
   }
 
   /** Constructs the initial set of actions in the toolbar. */
-  public void init() {
+  public void init(boolean enableAttachmentButton) {
     ToolbarView group = toolbarUi.addGroup();
     createBoldButton(group);
     createItalicButton(group);
@@ -172,8 +172,10 @@ public class EditToolbar {
     group = toolbarUi.addGroup();
     createInsertGadgetButton(group, user);
 
-    group = toolbarUi.addGroup();
-    createInsertAttachmentButton(group, user);
+    if (enableAttachmentButton) {
+      group = toolbarUi.addGroup();
+      createInsertAttachmentButton(group, user);
+    }
   }
 
   private void createBoldButton(ToolbarView toolbar) {

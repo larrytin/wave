@@ -42,7 +42,7 @@ public final class OperationServiceRegistryImpl extends AbstractOperationService
   // the default client libraries.
   @SuppressWarnings("deprecation")
   @Inject
-  OperationServiceRegistryImpl(NotifyOperationService notifyOpService) {
+  public OperationServiceRegistryImpl(NotifyOperationService notifyOpService) {
     super();
 
     // Register all the OperationProviders

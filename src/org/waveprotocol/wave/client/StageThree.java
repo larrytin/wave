@@ -170,6 +170,10 @@ public interface StageThree {
           stageTwo.getReader());
     }
 
+    protected boolean getAttachmentButtonEnabled() {
+      return true;
+    }
+
     protected String getLocalDomain() {
       return null;
     }
@@ -197,7 +201,7 @@ public interface StageThree {
       EditSession edit = getEditSession();
       MenuController.install(actions, panel);
       ToolbarSwitcher.install(stageTwo.getStageOne().getWavePanel(), getEditSession(),
-          getViewToolbar(), getEditToolbar());
+          getViewToolbar(), getEditToolbar(), getAttachmentButtonEnabled());
       WaveTitleHandler.install(edit, models);
       ReplyIndicatorController.install(actions, edit, panel);
       EditController.install(focus, actions, panel);

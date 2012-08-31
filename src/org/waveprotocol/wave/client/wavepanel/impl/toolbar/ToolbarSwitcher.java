@@ -47,15 +47,15 @@ public final class ToolbarSwitcher implements EditSession.Listener {
    * Creates a new {@link ToolbarSwitcher} and initialises it.
    */
   public static ToolbarSwitcher install(WavePanel panel, EditSession editSession,
-      ViewToolbar viewToolbar, EditToolbar editToolbar) {
+      ViewToolbar viewToolbar, EditToolbar editToolbar, boolean enableAttachmentButton) {
     ToolbarSwitcher switcher = new ToolbarSwitcher(panel, editSession, viewToolbar, editToolbar);
-    switcher.init();
+    switcher.init(enableAttachmentButton);
     return switcher;
   }
 
-  private void init() {
+  private void init(boolean enableAttachmentButton) {
     viewToolbar.init();
-    editToolbar.init();
+    editToolbar.init(enableAttachmentButton);
     editSession.addListener(this);
     if (editSession.isEditing()) {
       startEditSession(editSession.getEditor());

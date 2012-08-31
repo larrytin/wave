@@ -35,7 +35,7 @@ import java.util.Map;
 
 /**
  * Implements the "robot.folderAction" operations.
- * 
+ *
  * @author yurize@apache.org (Yuri Zelikov)
  */
 public class FolderActionService implements OperationService {
@@ -72,7 +72,7 @@ public class FolderActionService implements OperationService {
         supplement.markAsRead();
       } else {
         ObservableConversation conversation =
-            context.openConversation(operation, participant).getRoot();
+            context.openRootConversation(operation, participant);
         ConversationBlip blip = conversation.getBlip(blipId);
         supplement.markAsRead(blip);
       }

@@ -26,6 +26,7 @@ import com.google.wave.api.event.Event;
 import org.waveprotocol.box.server.robots.util.ConversationUtil;
 import org.waveprotocol.wave.model.conversation.Conversation;
 import org.waveprotocol.wave.model.conversation.ConversationBlip;
+import org.waveprotocol.wave.model.conversation.ObservableConversation;
 import org.waveprotocol.wave.model.conversation.ObservableConversationView;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
@@ -98,7 +99,7 @@ public interface OperationContext {
    * wavelet for specified wavelet id doesn't exist - the method returns
    * null. However, for user data wavelets the method will create a new empty one
    * and return it.
-   * 
+   *
    * @param waveId the wave id of the wavelet to open.
    * @param waveletId the wavelet id of the wavelet to open.
    * @param participant the id of the participant that wants to open the
@@ -113,7 +114,7 @@ public interface OperationContext {
    * wavelet for specified wavelet id doesn't exist - the method returns
    * null. However, for user data wavelets the method will create a new empty one
    * and return it.
-   * 
+   *
    * @param operation the operation specifying which wavelet to open.
    * @param participant the id of the participant that wants to open the
    *        wavelet.
@@ -149,6 +150,10 @@ public interface OperationContext {
    */
   ObservableConversationView openConversation(OperationRequest operation, ParticipantId participant)
       throws InvalidRequestException;
+
+  ObservableConversation openRootConversation(OperationRequest operation, ParticipantId participant)
+      throws InvalidRequestException;
+
 
   /**
    * Stores a reference from a temporary blip id to a real blip id. If the given

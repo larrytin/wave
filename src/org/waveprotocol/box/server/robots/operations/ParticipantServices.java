@@ -37,12 +37,12 @@ import java.util.List;
 
 /**
  * {@link OperationService} for operations that add or remove a participant.
- * 
+ *
  * <p>
  * These operations are:
  * <li>{@link OperationType#WAVELET_ADD_PARTICIPANT_NEWSYNTAX}</li>
  * <li>{@link OperationType#WAVELET_REMOVE_PARTICIPANT_NEWSYNTAX}</li>.
- * 
+ *
  * @author anthony dot watkins at sesi dot com (Anthony Watkins)
  */
 public class ParticipantServices implements OperationService {
@@ -54,7 +54,7 @@ public class ParticipantServices implements OperationService {
 
   /**
    * Adds or Removes a Participant on a Wavelet.
-   * 
+   *
    * @param operation the operation to execute.
    * @param context the context of the operation.
    * @param participant the participant performing this operation.
@@ -67,7 +67,7 @@ public class ParticipantServices implements OperationService {
     // Get the conversation wavelet. If participant performing operation is not
     // a member of wavelet, InvalidRequestException is thrown by this method.
     ObservableConversation conversation =
-        context.openConversation(operation, participant).getRoot();
+        context.openRootConversation(operation, participant);
 
     // Get participant operation is being performed on.
     String paramParticipant =
@@ -77,7 +77,7 @@ public class ParticipantServices implements OperationService {
     try {
       targetParticipant = ParticipantId.of(paramParticipant);
     } catch (InvalidParticipantAddress e) {
-      String message = "Target ParticipantId " + paramParticipant + " is not " + "valid"; 
+      String message = "Target ParticipantId " + paramParticipant + " is not " + "valid";
       LOG.info(message);
       throw new InvalidRequestException(message);
     }
@@ -97,7 +97,7 @@ public class ParticipantServices implements OperationService {
       case WAVELET_ADD_PARTICIPANT_NEWSYNTAX:
         // Make sure targetParticipant is not already member.
         if (conversation.getParticipantIds().contains(targetParticipant)) {
-          String message = targetParticipant.getAddress() + " is already a " + "member of wavelet"; 
+          String message = targetParticipant.getAddress() + " is already a " + "member of wavelet";
           LOG.info(message);
           throw new InvalidRequestException(message, operation);
         }
@@ -113,7 +113,7 @@ public class ParticipantServices implements OperationService {
         // Make sure targetParticipant is already member.
         if (!conversation.getParticipantIds().contains(targetParticipant)) {
           // Not a member, throw invalid request.
-          String message = targetParticipant.getAddress() + " is not a " + "member of wavelet"; 
+          String message = targetParticipant.getAddress() + " is not a " + "member of wavelet";
           LOG.info(message);
           throw new InvalidRequestException(message, operation);
         }
