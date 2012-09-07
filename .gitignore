@@ -10,3 +10,12 @@
 /_attachments
 /_certificates
 /_indexes
+
+# Created by Eclipse.
+.settings
+
+# Maven build output.
+target/
+
+# Created by OS.
+.DS_Store
