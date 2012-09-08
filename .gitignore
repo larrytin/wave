@@ -12,7 +12,9 @@
 /_indexes
 
 # Created by Eclipse.
-.settings
+.settings/
+.project
+.classpath
 
 # Maven build output.
 target/
