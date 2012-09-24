@@ -39,8 +39,6 @@ import com.google.wave.api.event.WaveletTitleChangedEvent;
 import com.google.wave.api.impl.EventMessageBundle;
 import com.google.wave.api.impl.GsonFactory;
 
-import net.oauth.OAuthException;
-
 import org.waveprotocol.wave.model.id.InvalidIdException;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
@@ -771,14 +769,14 @@ public abstract class AbstractRobot extends HttpServlet implements EventHandler 
       }
 
       // Validates the request.
-      try {
+      // try {
         @SuppressWarnings("unchecked")
         Map<String, String[]> parameterMap = req.getParameterMap();
         waveService.validateOAuthRequest(req.getRequestURL().toString(), parameterMap,
             json, bundle.getRpcServerUrl());
-      } catch (OAuthException e) {
-        throw new IllegalArgumentException("Error validating OAuth request", e);
-      }
+      // } catch (OAuthException e) {
+      // throw new IllegalArgumentException("Error validating OAuth request", e);
+      // }
     }
     return bundle;
   }

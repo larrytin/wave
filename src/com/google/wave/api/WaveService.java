@@ -20,45 +20,23 @@ import com.google.wave.api.JsonRpcConstant.ParamsProperty;
 import com.google.wave.api.impl.GsonFactory;
 import com.google.wave.api.impl.WaveletData;
 
-import net.oauth.OAuth;
-import net.oauth.OAuthAccessor;
-import net.oauth.OAuthConsumer;
-import net.oauth.OAuthException;
-import net.oauth.OAuthMessage;
-import net.oauth.OAuthValidator;
-import net.oauth.SimpleOAuthValidator;
-import net.oauth.client.OAuthClient;
-import net.oauth.http.HttpClient;
-import net.oauth.http.HttpMessage;
-import net.oauth.http.HttpResponseMessage;
-import net.oauth.signature.OAuthSignatureMethod;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.waveprotocol.wave.model.id.InvalidIdException;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.logging.Logger;
 
 /**
@@ -69,34 +47,30 @@ public class WaveService {
   /**
    * Helper class to make outgoing OAuth HTTP requests.
    */
-  static class HttpFetcher implements HttpClient {
+  static class HttpFetcher {
 
+    public static final String USER_ID_KEY = "u";
+    public static final String TOKEN_KEY = "t";
     /** The {@code urlfetch} fetch timeout in ms. */
     private static final int URLFETCH_TIMEOUT_IN_MS = 10 * 1000;
 
     private static final String HTTP_POST_METHOD = "POST";
     private static final String HTTP_PUT_METHOD = "PUT";
 
-    @Override
-    public HttpResponseMessage execute(HttpMessage request, Map<String, Object> stringObjectMap)
-        throws IOException {
-      String body = readInputStream(request.getBody());
+    public HttpResponse execute(ConsumerData consumerData, String body) throws IOException {
       OutputStreamWriter out = null;
       HttpURLConnection conn = null;
       // Open the connection.
-      conn = (HttpURLConnection) request.url.openConnection();
+      URL url = new URL(consumerData.getRpcServerUrl());
+      conn = (HttpURLConnection) url.openConnection();
       conn.setReadTimeout(URLFETCH_TIMEOUT_IN_MS);
-      conn.setRequestMethod(request.method);
+      conn.setRequestMethod(HTTP_POST_METHOD);
       // Add the headers
-      if (request.headers != null) {
-        for (java.util.Map.Entry<String, String> header : request.headers) {
-          conn.setRequestProperty(header.getKey(), header.getValue());
-        }
-      }
+      conn.setRequestProperty("Content-Type", JSON_MIME_TYPE);
+      conn.setRequestProperty(USER_ID_KEY, consumerData.getConsumerKey());
+      conn.setRequestProperty(TOKEN_KEY, consumerData.getConsumerSecret());
 
-      boolean doOutput =
-          body != null && (HTTP_POST_METHOD.equalsIgnoreCase(request.method)
-              || HTTP_PUT_METHOD.equalsIgnoreCase(request.method));
+      boolean doOutput = body != null;
 
       if (doOutput) {
         conn.setDoOutput(true);
@@ -116,8 +90,7 @@ public class WaveService {
       }
 
       // Return the response stream.
-      return new HttpResponse(
-          request.method, request.url, conn.getResponseCode(), conn.getInputStream());
+      return new HttpResponse(conn.getResponseCode(), conn.getInputStream());
     }
 
     /**
@@ -145,7 +118,7 @@ public class WaveService {
    * A simple implementation of {@link HttpResponseMessage} that gets the
    * response from {@link HttpURLConnection#getInputStream()}.
    */
-  static class HttpResponse extends HttpResponseMessage {
+  static class HttpResponse {
 
     /** The HTTP response code. */
     private final int statusCode;
@@ -161,19 +134,16 @@ public class WaveService {
      * @param statusCode the HTTP response code.
      * @param responseStream the response stream.
      */
-    public HttpResponse(String method, URL url, int statusCode, InputStream responseStream) {
-      super(method, url);
+    public HttpResponse(int statusCode, InputStream responseStream) {
       this.statusCode = statusCode;
       this.responseStream = responseStream;
     }
 
-    @Override
     public int getStatusCode() {
       return statusCode;
     }
 
-    @Override
-    public InputStream openBody() {
+    public InputStream getBody() {
       return responseStream;
     }
   }
@@ -192,12 +162,6 @@ public class WaveService {
     /** The URL that handles the JSON-RPC request in the active mode. */
     private final String rpcServerUrl;
 
-    /** Whether this session is user authenticated */
-    private final boolean userAuthenticated;
-
-    /** The OAuth Accessor contains authentication data used to make requests */
-    private final OAuthAccessor accessor;
-
     /**
      * Constructor.
      *
@@ -214,19 +178,6 @@ public class WaveService {
       this.consumerKey = consumerKeyPrefix + consumerKey;
       this.consumerSecret = consumerSecret;
       this.rpcServerUrl = rpcServerUrl;
-
-      userAuthenticated = false;
-      OAuthConsumer consumer = new OAuthConsumer(null, consumerKey, consumerSecret, null);
-      consumer.setProperty(OAuth.OAUTH_SIGNATURE_METHOD, OAuth.HMAC_SHA1);
-      accessor = new OAuthAccessor(consumer);
-    }
-
-    public ConsumerData(OAuthAccessor accessor, String rpcServerUrl) {
-      this.consumerKey = accessor.consumer.consumerKey;
-      this.consumerSecret = accessor.consumer.consumerSecret;
-      this.accessor = accessor;
-      this.rpcServerUrl = rpcServerUrl;
-      userAuthenticated = true;
     }
 
     /**
@@ -249,15 +200,6 @@ public class WaveService {
     public String getRpcServerUrl() {
       return rpcServerUrl;
     }
-
-    public boolean isUserAuthenticated() {
-      return userAuthenticated;
-    }
-
-    public OAuthAccessor getAccessor() {
-      return accessor;
-    }
-
   }
 
   /** The wire protocol version. */
@@ -281,9 +223,6 @@ public class WaveService {
 
   /** Serializer to serialize events and operations in active mode. */
   private static final Gson SERIALIZER = new GsonFactory().create(OPERATION_NAMESPACE);
-
-  /** OAuth request validator. */
-  private static final OAuthValidator VALIDATOR = new SimpleOAuthValidator();
 
   /** A map of RPC server URL to its consumer data object. */
   private final Map<String, ConsumerData> consumerDataMap = new HashMap<String, ConsumerData>();
@@ -350,39 +289,7 @@ public class WaveService {
     }
     consumerDataMap.put(rpcServerUrl, new ConsumerData(consumerKey, consumerSecret, rpcServerUrl));
   }
-
-  /**
-   * Sets the OAuth related properties that are used to sign the outgoing
-   * operations for 3-legged OAuth.
-   *
-   * <p>
-   * Performing the OAuth dance is not part of this interface - once you've done
-   * the dance, pass the constructed accessor and rpc endpoint into this method.
-   *
-   * <p>
-   * Ensure that the endpoint URL you pass in matches exactly the URL used to
-   * request an access token (including https vs http).
-   *
-   *  For the rpcServerUrl you can use:
-   * <ul>
-   * <li>https://www-opensocial.googleusercontent.com/api/rpc - for wave
-   * preview.
-   * <li>
-   * https://www-opensocial-sandbox.googleusercontent.com/api/rpc - for wave
-   * sandbox.
-   * </ul>
-   *
-   * @param accessor the {@code OAuthAccessor} with access token and secret
-   * @param rpcServerUrl the endpoint URL of the server that serves the JSON-RPC
-   *        request.
-   */
-  public void setupOAuth(OAuthAccessor accessor, String rpcServerUrl) {
-    if (accessor == null || rpcServerUrl == null) {
-      throw new IllegalArgumentException("Accessor and RPCServerURL have to be non-null");
-    }
-    consumerDataMap.put(rpcServerUrl, new ConsumerData(accessor, rpcServerUrl));
-  }
-
+  
   /**
    * Validates the incoming HTTP request.
    *
@@ -393,8 +300,8 @@ public class WaveService {
    * @throws OAuthException if it can't validate the request.
    */
   public void validateOAuthRequest(
-      String requestUrl, Map<String, String[]> requestParams, String jsonBody, String rpcServerUrl)
-      throws OAuthException {
+      String requestUrl, Map<String, String[]> requestParams, String jsonBody, String rpcServerUrl) {
+    // throws OAuthException {
     ConsumerData consumerData = consumerDataMap.get(rpcServerUrl);
     if (consumerData == null) {
       throw new IllegalArgumentException(
@@ -402,37 +309,37 @@ public class WaveService {
               + rpcServerUrl);
     }
 
-    List<OAuth.Parameter> params = new ArrayList<OAuth.Parameter>();
-    for (Map.Entry<String, String[]> entry : requestParams.entrySet()) {
-      for (String value : entry.getValue()) {
-        params.add(new OAuth.Parameter(entry.getKey(), value));
-      }
-    }
-    OAuthMessage message = new OAuthMessage(POST, requestUrl, params);
-
-    // Compute and check the hash of the body.
-    try {
-      MessageDigest md = MessageDigest.getInstance(SHA_1);
-      byte[] hash = md.digest(jsonBody.getBytes(UTF_8));
-      String encodedHash = new String(Base64.encodeBase64(hash, false), UTF_8);
-      if (!encodedHash.equals(message.getParameter(OAUTH_BODY_HASH))) {
-        throw new IllegalArgumentException(
-            "Body hash does not match. Expected: " + encodedHash + ", provided: "
-                + message.getParameter(OAUTH_BODY_HASH));
-      }
-
-      OAuthAccessor accessor = consumerData.getAccessor();
-      LOG.info("Signature base string: " + OAuthSignatureMethod.getBaseString(message));
-      VALIDATOR.validateMessage(message, accessor);
-    } catch (NoSuchAlgorithmException e) {
-      throw new OAuthException("Error validating OAuth request", e);
-    } catch (URISyntaxException e) {
-      throw new OAuthException("Error validating OAuth request", e);
-    } catch (OAuthException e) {
-      throw new OAuthException("Error validating OAuth request", e);
-    } catch (IOException e) {
-      throw new OAuthException("Error validating OAuth request", e);
-    }
+    // List<OAuth.Parameter> params = new ArrayList<OAuth.Parameter>();
+    // for (Map.Entry<String, String[]> entry : requestParams.entrySet()) {
+    // for (String value : entry.getValue()) {
+    // params.add(new OAuth.Parameter(entry.getKey(), value));
+    // }
+    // }
+    // OAuthMessage message = new OAuthMessage(POST, requestUrl, params);
+    //
+    // // Compute and check the hash of the body.
+    // try {
+    // MessageDigest md = MessageDigest.getInstance(SHA_1);
+    // byte[] hash = md.digest(jsonBody.getBytes(UTF_8));
+    // String encodedHash = new String(Base64.encodeBase64(hash, false), UTF_8);
+    // if (!encodedHash.equals(message.getParameter(OAUTH_BODY_HASH))) {
+    // throw new IllegalArgumentException(
+    // "Body hash does not match. Expected: " + encodedHash + ", provided: "
+    // + message.getParameter(OAUTH_BODY_HASH));
+    // }
+    //
+    // OAuthAccessor accessor = consumerData.getAccessor();
+    // LOG.info("Signature base string: " + OAuthSignatureMethod.getBaseString(message));
+    // VALIDATOR.validateMessage(message, accessor);
+    // } catch (NoSuchAlgorithmException e) {
+    // throw new OAuthException("Error validating OAuth request", e);
+    // } catch (URISyntaxException e) {
+    // throw new OAuthException("Error validating OAuth request", e);
+    // } catch (OAuthException e) {
+    // throw new OAuthException("Error validating OAuth request", e);
+    // } catch (IOException e) {
+    // throw new OAuthException("Error validating OAuth request", e);
+    // }
   }
 
   /**
@@ -744,104 +651,20 @@ public class WaveService {
     String json =
         SERIALIZER.toJson(opQueue.getPendingOperations(), GsonFactory.OPERATION_REQUEST_LIST_TYPE);
 
-    try {
-      InputStream bodyStream;
-      InputStream responseStream;
-      try {
-        bodyStream = new ByteArrayInputStream(json.getBytes("UTF-8"));
-      } catch (UnsupportedEncodingException e) {
-        throw new IllegalStateException(e);
-      }
-      if (!consumerDataObj.isUserAuthenticated()) {
-        String url = createOAuthUrlString(
-            json, consumerDataObj.getRpcServerUrl(), consumerDataObj.getAccessor());
-        LOG.info("JSON request to be sent: " + json);
-        HttpMessage request = new HttpMessage("POST", new URL(url), bodyStream);
-        request.headers.add(
-            new SimpleEntry<String, String>(HttpMessage.CONTENT_TYPE, JSON_MIME_TYPE));
-        request.headers.add(new SimpleEntry<String, String>("oauth_version", "1.0"));
-        responseStream =
-            httpFetcher.execute(request, Collections.<String, Object>emptyMap()).getBody();
-      } else {
-        OAuthAccessor accessor = consumerDataObj.getAccessor();
-        OAuthMessage message = accessor.newRequestMessage("POST", rpcServerUrl, null, bodyStream);
-        message.getHeaders().add(
-            new SimpleEntry<String, String>(HttpMessage.CONTENT_TYPE, "application/json"));
-        message.getHeaders().add(new SimpleEntry<String, String>("oauth_version", "1.0"));
-        OAuthClient client = new OAuthClient(httpFetcher);
-        responseStream = client.invoke(message, net.oauth.ParameterStyle.BODY).getBodyAsStream();
-      }
+    InputStream responseStream;
+    LOG.info("JSON request to be sent: " + json);
+    responseStream = httpFetcher.execute(consumerDataObj, json).getBody();
 
-      String responseString = HttpFetcher.readInputStream(responseStream);
-      LOG.info("Response returned: " + responseString);
+    String responseString = HttpFetcher.readInputStream(responseStream);
+    LOG.info("Response returned: " + responseString);
 
-      List<JsonRpcResponse> responses = null;
-      if (responseString.startsWith("[")) {
-        responses = SERIALIZER.fromJson(responseString, GsonFactory.JSON_RPC_RESPONSE_LIST_TYPE);
-      } else {
-        responses = new ArrayList<JsonRpcResponse>(1);
-        responses.add(SERIALIZER.fromJson(responseString, JsonRpcResponse.class));
-      }
-      return responses;
-    } catch (OAuthException e) {
-      LOG.warning("OAuthException when constructing the OAuth parameters: " + e);
-      throw new IOException(e);
-    } catch (URISyntaxException e) {
-      LOG.warning("URISyntaxException when constructing the OAuth parameters: " + e);
-      throw new IOException(e);
+    List<JsonRpcResponse> responses = null;
+    if (responseString.startsWith("[")) {
+      responses = SERIALIZER.fromJson(responseString, GsonFactory.JSON_RPC_RESPONSE_LIST_TYPE);
+    } else {
+      responses = new ArrayList<JsonRpcResponse>(1);
+      responses.add(SERIALIZER.fromJson(responseString, JsonRpcResponse.class));
     }
-  }
-
-  /**
-   * Creates a URL that contains the necessary OAuth query parameters for the
-   * given JSON string.
-   *
-   * The required OAuth parameters are:
-   * <ul>
-   * <li>oauth_body_hash</li>
-   * <li>oauth_consumer_key</li>
-   * <li>oauth_signature_method</li>
-   * <li>oauth_timestamp</li>
-   * <li>oauth_nonce</li>
-   * <li>oauth_version</li>
-   * <li>oauth_signature</li>
-   * </ul>
-   *
-   * @param jsonBody the JSON string to construct the URL from.
-   * @param rpcServerUrl the URL of the handler that services the JSON-RPC
-   *        request.
-   * @param accessor the OAuth accessor used to create the signed string.
-   * @return a URL for the given JSON string, and the required OAuth parameters.
-   */
-  public static String createOAuthUrlString(
-      String jsonBody, String rpcServerUrl, OAuthAccessor accessor)
-      throws IOException, URISyntaxException, OAuthException {
-    OAuthMessage message =
-        new OAuthMessage(POST, rpcServerUrl, Collections.<SimpleEntry<String, String>>emptyList());
-
-    // Compute the hash of the body.
-    byte[] rawBody = jsonBody.getBytes(UTF_8);
-    byte[] hash = DigestUtils.sha(rawBody);
-    byte[] encodedHash = Base64.encodeBase64(hash);
-    message.addParameter(OAUTH_BODY_HASH, new String(encodedHash, UTF_8));
-
-    // Add other parameters.
-
-    message.addRequiredParameters(accessor);
-    LOG.info("Signature base string: " + OAuthSignatureMethod.getBaseString(message));
-
-    // Construct the resulting URL.
-    StringBuilder sb = new StringBuilder(rpcServerUrl);
-    char connector = '?';
-    for (Map.Entry<String, String> p : message.getParameters()) {
-      if (!p.getKey().equals(jsonBody)) {
-        sb.append(connector);
-        sb.append(URLEncoder.encode(p.getKey(), UTF_8));
-        sb.append('=');
-        sb.append(URLEncoder.encode(p.getValue(), UTF_8));
-        connector = '&';
-      }
-    }
-    return sb.toString();
+    return responses;
   }
 }
