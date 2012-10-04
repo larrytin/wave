@@ -11,13 +11,13 @@
 /_certificates
 /_indexes
 
-# Created by Eclipse.
+# Maven build output.
+target/
+
+# Generated for Eclipse.
 .settings/
 .project
 .classpath
-
-# Maven build output.
-target/
 
 # Created by OS.
 .DS_Store
