@@ -26,11 +26,8 @@
       <url>https://oauth.googlecode.com/svn/code/maven/</url>
     </repository>
     <repository>
-      <id>wave-local</id>
-      <layout>default</layout>
-      <name>wave local</name>
-      <!-- Checkout from https://github.com/pires/wave/tree/master/repo -->
-      <url>file://${user.home}/dev/tools/lib/wave-maven/repo/</url>
+      <id>goodow-wave</id>
+      <url>https://raw.github.com/goodow/maven/master/repositories/wave/</url>
     </repository>
   </repositories>
   <properties>
@@ -43,7 +40,7 @@
     <maven.compiler.target>1.6</maven.compiler.target>
     
     <jetty.version>8.1.3.v20120416</jetty.version>
-    <socketio.version>0.1-SNAPSHOT</socketio.version>
+    <socketio.version>1.0</socketio.version>
     
     <!-- Don't let your Mac use a crazy non-standard encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
