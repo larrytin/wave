@@ -1,7 +1,7 @@
 /build
 /test_out
 /dist
-/gen
+# /gen
 /bin
 /server.config
 /_sessions

@@ -16,6 +16,7 @@
 package com.google.wave.api;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -41,8 +42,6 @@ import com.google.wave.api.impl.WaveletData;
 
 import junit.framework.TestCase;
 
-import net.oauth.http.HttpMessage;
-
 import org.mockito.Matchers;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
@@ -54,7 +53,6 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -139,10 +137,8 @@ public class AbstractRobotTest extends TestCase {
 
   public void testSubmit() throws Exception {
     HttpFetcher fetcher = mock(HttpFetcher.class);
-    when(fetcher.execute(any(HttpMessage.class), anyMapOf(String.class, Object.class)))
-        .thenReturn(new HttpResponse("POST", new URL("http://foo.google.com"), 0,
-            new ByteArrayInputStream("[{\"id\":\"op1\",\"data\":{}}]".getBytes())));
-
+    when(fetcher.execute(any(WaveService.ConsumerData.class), anyString())).thenReturn(
+        new HttpResponse(0, new ByteArrayInputStream("[{\"id\":\"op1\",\"data\":{}}]".getBytes())));
 
     MockRobot robot = new MockRobot();
     robot.setupOAuth("consumerKey", "consumerSecret", "http://gmodules.com/api/rpc");
@@ -159,7 +155,7 @@ public class AbstractRobotTest extends TestCase {
     assertEquals(1, opQueue.getPendingOperations().size());
     robot.submit(wavelet, "http://gmodules.com/api/rpc", service);
     assertEquals(0, opQueue.getPendingOperations().size());
-    verify(fetcher, times(1)).execute(any(HttpMessage.class), anyMapOf(String.class, Object.class));
+    verify(fetcher, times(1)).execute(any(WaveService.ConsumerData.class), anyString());
   }
 
   public void testServiceCapabilitiesRequest() throws Exception {
