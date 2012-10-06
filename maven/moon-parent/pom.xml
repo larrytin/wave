@@ -30,7 +30,7 @@
     <gwt.version>2.5.0-rc1</gwt.version>
     
     <!-- GAE properties -->
-    <gae.version>1.7.0</gae.version>
+    <gae.version>1.7.2</gae.version>
     <gae.home>${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
   </properties>
   
