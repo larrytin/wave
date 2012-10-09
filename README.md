@@ -1,3 +1,6 @@
+Development And Running
+----------
+
 -- Option A: Import your project into Eclipse --
 
 Configure Eclipse following the instructions at 
@@ -29,3 +32,9 @@ To compile your project without test and install the artifact to local repositor
   
 For a full listing of other goals, visit:
 http://mojo.codehaus.org/gwt-maven-plugin/plugin-info.html
+
+
+Continuous Integration
+----------
+
+This project is ![Built and tested on CloudBees](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png) . The public CI instance is available at [goodow.ci.cloudbees.com](https://goodow.ci.cloudbees.com/) .
