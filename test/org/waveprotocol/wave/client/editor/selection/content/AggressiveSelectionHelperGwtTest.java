@@ -16,8 +16,7 @@
  */
 package org.waveprotocol.wave.client.editor.selection.content;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorImpl;
 import org.waveprotocol.wave.client.editor.EditorSettings;
@@ -33,6 +32,8 @@ import org.waveprotocol.wave.model.conversation.Blips;
 import org.waveprotocol.wave.model.document.util.Point;
 import org.waveprotocol.wave.model.document.util.Pretty;
 
+import com.google.gwt.junit.client.GWTTestCase;
+
 /**
  * Tests for AggressiveSelectionHelper.
  *
@@ -40,6 +41,7 @@ import org.waveprotocol.wave.model.document.util.Pretty;
  *
  */
 
+@Ignore
 public class AggressiveSelectionHelperGwtTest extends GWTTestCase {
   @Override
   public String getModuleName() {

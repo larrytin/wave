@@ -25,23 +25,23 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
+import org.junit.Ignore;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.waveprotocol.wave.federation.FederationErrorProto.FederationError;
+import org.waveprotocol.wave.federation.FederationErrors;
+import org.waveprotocol.wave.federation.xmpp.MockOutgoingPacketTransport.Router;
 import org.xmpp.packet.IQ;
 import org.xmpp.packet.Message;
 import org.xmpp.packet.Packet;
 import org.xmpp.packet.PacketError;
-import org.waveprotocol.wave.federation.FederationErrorProto.FederationError;
-import org.waveprotocol.wave.federation.FederationErrors;
-import org.waveprotocol.wave.federation.xmpp.MockOutgoingPacketTransport.Router;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Test round-trips between two XmppManager instances pointed at each other.
@@ -53,6 +53,7 @@ import java.util.concurrent.TimeUnit;
  * @author thorogood@google.com (Sam Thorogood)
  */
 
+@Ignore
 public class RoundTripTest extends TestCase {
 
   private static final String SERVER1_DOMAIN = "google.com";

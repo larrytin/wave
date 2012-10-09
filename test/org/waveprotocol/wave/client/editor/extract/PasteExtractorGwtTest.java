@@ -16,11 +16,7 @@
  */
 package org.waveprotocol.wave.client.editor.extract;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.ui.RootPanel;
-
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorImpl;
 import org.waveprotocol.wave.client.editor.testing.ContentSerialisationUtil;
@@ -35,6 +31,11 @@ import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
 import org.waveprotocol.wave.model.operation.SilentOperationSink;
 import org.waveprotocol.wave.model.schema.conversation.ConversationSchemas;
 
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.ui.RootPanel;
+
 /**
  * Test cut and paste extracting logic.
  *
@@ -47,6 +48,7 @@ import org.waveprotocol.wave.model.schema.conversation.ConversationSchemas;
  * @author davidbyttow@google.com (David Byttow)
  */
 
+@Ignore
 public class PasteExtractorGwtTest extends GWTTestCase {
   @Override
   protected void gwtSetUp() throws Exception {

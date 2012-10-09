@@ -18,8 +18,12 @@
 package org.waveprotocol.wave.model.experimental.schema;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import junit.framework.TestCase;
 
+import org.junit.Ignore;
 import org.waveprotocol.wave.model.document.operation.Attributes;
 import org.waveprotocol.wave.model.document.operation.AttributesUpdate;
 import org.waveprotocol.wave.model.document.operation.impl.AttributesImpl;
@@ -32,14 +36,12 @@ import org.waveprotocol.wave.model.experimental.schema.AttributeValidationResult
 import org.waveprotocol.wave.model.experimental.schema.DocInitializationParser.ParseException;
 import org.waveprotocol.wave.model.experimental.schema.SchemaPattern.Prologue;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * Tests for SchemaPattern.
  *
  */
 
+@Ignore
 public class SchemaFactoryTest extends TestCase {
 
   private static final Attributes SAMPLE_ATTRIBUTES =

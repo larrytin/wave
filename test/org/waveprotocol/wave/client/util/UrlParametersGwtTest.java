@@ -17,15 +17,18 @@
 
 package org.waveprotocol.wave.client.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Ignore;
+
+import com.google.gwt.junit.client.GWTTestCase;
+
 /**
  */
 
+@Ignore
 public class UrlParametersGwtTest extends GWTTestCase {
 
   @Override

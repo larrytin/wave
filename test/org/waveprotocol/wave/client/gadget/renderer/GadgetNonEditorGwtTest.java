@@ -18,25 +18,26 @@ package org.waveprotocol.wave.client.gadget.renderer;
 
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.AUTHOR_ATTRIBUTE;
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.CATEGORY_TAGNAME;
-import static org.waveprotocol.wave.model.gadget.GadgetConstants.TAGNAME;
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.KEY_ATTRIBUTE;
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.PREFS_ATTRIBUTE;
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.STATE_ATTRIBUTE;
+import static org.waveprotocol.wave.model.gadget.GadgetConstants.TAGNAME;
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.TITLE_ATTRIBUTE;
 import static org.waveprotocol.wave.model.gadget.GadgetConstants.URL_ATTRIBUTE;
 
-import com.google.gwt.http.client.URL;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONString;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.Window.Location;
-
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.gadget.GadgetXmlUtil;
 import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
 import org.waveprotocol.wave.model.id.ModernIdSerialiser;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.id.WaveletName;
+
+import com.google.gwt.http.client.URL;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.Window.Location;
 
 /**
  * Tests Gadget class functionality that can be tested outside of the Editor framework.
@@ -45,6 +46,7 @@ import org.waveprotocol.wave.model.id.WaveletName;
  * TODO: Reorganize tests after the client refactoring is complete.
  */
 
+@Ignore
 public class GadgetNonEditorGwtTest extends GWTTestCase {
 
   private static final String VIEW_NAME = "canvas";
