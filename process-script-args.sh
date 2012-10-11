@@ -34,3 +34,18 @@ done
 if [ $DEBUG_MODE = "on" ] ; then
   DEBUG_FLAGS=-Xrunjdwp:transport=dt_socket,server=y,suspend=$SUSPEND,address=$DEBUG_PORT
 fi
+
+echo ${ARGV[*]}
+echo ${ARGV[0]}
+if [ $ARGC -eq 0 ]; then
+    SERVER_CONFIG="server.config"
+else
+    SERVER_CONFIG=${ARGV[0]}
+fi
+
+if [ ! -e $SERVER_CONFIG ]; then
+    echo "You need to create a server.config file and set its path as the "
+    echo "first argument. For creating server.config, you can copy "
+    echo "server.config.example and change the corresponding fields inside."
+    exit 1
+fi
