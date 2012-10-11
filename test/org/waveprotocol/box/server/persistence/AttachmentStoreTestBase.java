@@ -17,13 +17,6 @@
 
 package org.waveprotocol.box.server.persistence;
 
-import junit.framework.TestCase;
-
-import org.waveprotocol.box.server.persistence.AttachmentStore.AttachmentData;
-import org.waveprotocol.wave.model.id.WaveId;
-import org.waveprotocol.wave.model.id.WaveletId;
-import org.waveprotocol.wave.model.id.WaveletName;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,11 +24,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import junit.framework.TestCase;
+
+import org.junit.Ignore;
+import org.waveprotocol.box.server.persistence.AttachmentStore.AttachmentData;
+import org.waveprotocol.wave.model.id.WaveId;
+import org.waveprotocol.wave.model.id.WaveletId;
+import org.waveprotocol.wave.model.id.WaveletName;
+
 /**
  * Test cases for the Attachment Stores.
  *
  * @author josephg@gmail.com (Joseph Gentle)
  */
+@Ignore
 public abstract class AttachmentStoreTestBase extends TestCase {
 
   private final static WaveletName WAVELET_NAME = WaveletName.of(WaveId.of("example.com", "w+abc"),

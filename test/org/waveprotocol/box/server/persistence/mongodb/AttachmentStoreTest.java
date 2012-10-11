@@ -17,15 +17,17 @@
 
 package org.waveprotocol.box.server.persistence.mongodb;
 
-import com.mongodb.DB;
-
+import org.junit.Ignore;
 import org.waveprotocol.box.server.persistence.AttachmentStore;
 import org.waveprotocol.box.server.persistence.AttachmentStoreTestBase;
+
+import com.mongodb.DB;
 
 /**
  * A wrapper around AttachmentStoreBase which tests the mongo-based attachment
  * store.
  */
+@Ignore
 public class AttachmentStoreTest extends AttachmentStoreTestBase {
   private static final String TEST_DATABASE = "AttachmentTest";
 

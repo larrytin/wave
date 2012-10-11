@@ -16,9 +16,7 @@
  */
 package org.waveprotocol.wave.client.editor.content.img;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
-
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorSettings;
 import org.waveprotocol.wave.client.editor.EditorStaticDeps;
@@ -31,12 +29,16 @@ import org.waveprotocol.wave.client.widget.popup.simple.Popup;
 import org.waveprotocol.wave.model.conversation.Blips;
 import org.waveprotocol.wave.model.document.util.LineContainers;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.junit.client.GWTTestCase;
+
 /**
  * Tests that the image doodad renderer is hooked up to the editor and draws images correctly.
  *
  * @author patcoleman@google.com (Pat Coleman)
  */
 
+@Ignore
 public class ImgDoodadGwtTest extends GWTTestCase {
 
   @Override

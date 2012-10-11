@@ -16,16 +16,6 @@
  */
 package org.waveprotocol.wave.client.wavepanel.event;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.ui.RootPanel;
-
-import org.waveprotocol.wave.client.common.safehtml.EscapeUtils;
-import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
-import org.waveprotocol.wave.client.wavepanel.event.EventDispatcherPanel.HandlerCollection;
-import org.waveprotocol.wave.model.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,11 +23,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Ignore;
+import org.waveprotocol.wave.client.common.safehtml.EscapeUtils;
+import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
+import org.waveprotocol.wave.client.wavepanel.event.EventDispatcherPanel.HandlerCollection;
+import org.waveprotocol.wave.model.util.Pair;
+
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.ui.RootPanel;
+
 /**
  * Tests for {@link EventDispatcherPanel}.
  *
  */
 
+@Ignore
 @SuppressWarnings("unchecked") // Arrays.asList() of generics.
 public class EventDispatcherPanelGwtTest extends GWTTestCase {
 

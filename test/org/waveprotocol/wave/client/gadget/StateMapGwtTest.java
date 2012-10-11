@@ -16,6 +16,8 @@
  */
 package org.waveprotocol.wave.client.gadget;
 
+import org.junit.Ignore;
+
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -23,6 +25,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  *
  */
 
+@Ignore
 public class StateMapGwtTest extends GWTTestCase {
   /**
    * Sample JSON string to convert to StateMap object.

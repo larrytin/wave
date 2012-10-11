@@ -23,12 +23,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.xmpp.packet.IQ;
-import org.joda.time.DateTimeUtils;
-import org.waveprotocol.wave.federation.FederationErrors;
-
-
 import junit.framework.TestCase;
+
+import org.joda.time.DateTimeUtils;
+import org.junit.Ignore;
+import org.waveprotocol.wave.federation.FederationErrors;
+import org.xmpp.packet.IQ;
 
 /**
  * Performs naive tests over RemoteDisco. Integration testing is performed in
@@ -37,6 +37,7 @@ import junit.framework.TestCase;
  * @author thorogood@google.com (Sam Thorogood)
  */
 
+@Ignore
 public class RemoteDiscoTest extends TestCase {
 
   private final static String REMOTE_DOMAIN = "acmewave.com";

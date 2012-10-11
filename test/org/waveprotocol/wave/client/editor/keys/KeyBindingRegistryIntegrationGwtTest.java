@@ -16,12 +16,7 @@
  */
 package org.waveprotocol.wave.client.editor.keys;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.Panel;
-
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.common.util.KeyCombo;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorAction;
@@ -39,6 +34,12 @@ import org.waveprotocol.wave.client.widget.popup.RelativePopupPositioner;
 import org.waveprotocol.wave.client.widget.popup.UniversalPopup;
 import org.waveprotocol.wave.client.widget.popup.simple.Popup;
 
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.Panel;
+
 /**
  * Integration tests to make sure the key bindings passed into an editor are called properly
  * when key events are passed in from outside the editor.
@@ -46,6 +47,7 @@ import org.waveprotocol.wave.client.widget.popup.simple.Popup;
  * @author patcoleman@google.com (Pat Coleman)
  */
 
+@Ignore
 public class KeyBindingRegistryIntegrationGwtTest extends GWTTestCase {
   private static final int G_CODE = 'g';
   private int callTracker;

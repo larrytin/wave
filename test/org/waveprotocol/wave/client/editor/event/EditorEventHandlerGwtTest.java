@@ -17,13 +17,14 @@
 
 package org.waveprotocol.wave.client.editor.event;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
-import com.google.gwt.dom.client.Text;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.junit.client.GWTTestCase;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.common.util.EventWrapper;
 import org.waveprotocol.wave.client.common.util.FakeSignalEvent;
 import org.waveprotocol.wave.client.common.util.SignalEvent;
@@ -45,12 +46,12 @@ import org.waveprotocol.wave.model.document.util.FocusedPointRange;
 import org.waveprotocol.wave.model.document.util.Point;
 import org.waveprotocol.wave.model.document.util.PointRange;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.Text;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.junit.client.GWTTestCase;
 
 /**
  * Tests for EditorEventHandler.
@@ -59,6 +60,7 @@ import java.util.Map;
  *
  */
 
+@Ignore
 public class EditorEventHandlerGwtTest
 //  extends JavaGWTTestCase {
   extends GWTTestCase {

@@ -16,6 +16,8 @@
  */
 package org.waveprotocol.wave.client.gadget.renderer;
 
+import org.junit.Ignore;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -24,6 +26,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  *
  */
 
+@Ignore
 public class ControllerGwtTest extends GWTTestCase {
 
   private static class TestController extends Controller {

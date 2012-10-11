@@ -16,11 +16,7 @@
  */
 package org.waveprotocol.wave.client.editor.extract;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.ui.RootPanel;
-
+import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorImpl;
 import org.waveprotocol.wave.client.editor.EditorSettings;
@@ -38,11 +34,17 @@ import org.waveprotocol.wave.model.document.util.Point;
 import org.waveprotocol.wave.model.document.util.ReadableDocumentView;
 import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.ui.RootPanel;
+
 /**
  * Tests for PasteFormatRenderer
  *
  */
 
+@Ignore
 public class PasteFormatRendererGwtTest extends GWTTestCase {
 
   /** GWT version where invalid closing-br tags appear in innerHTML strings. */

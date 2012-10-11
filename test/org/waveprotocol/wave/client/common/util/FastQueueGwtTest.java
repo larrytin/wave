@@ -16,15 +16,18 @@
 
 package org.waveprotocol.wave.client.common.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import org.junit.Ignore;
+
+import com.google.gwt.junit.client.GWTTestCase;
+
 /**
  * @author piotrkaleta@google.com (Piotr Kaleta)
  */
+@Ignore
 public class FastQueueGwtTest extends GWTTestCase {
 
   public void testAddNull() throws Exception {
