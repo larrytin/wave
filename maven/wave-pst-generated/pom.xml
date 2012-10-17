@@ -5,8 +5,8 @@
     <artifactId>moon-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>moon-wave-protobuf</artifactId>
-  <url>http://code.google.com/p/goodow/</url>
+  <artifactId>wave-pst-generated</artifactId>
+  <url>https://github.com/goodow/wave/</url>
   <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>
@@ -17,13 +17,25 @@
   
   <dependencies>
     <dependency>
-      <groupId>com.google.protobuf</groupId>
-       <artifactId>protobuf-java</artifactId>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+    </dependency>
+    
+    <!-- Internal modules -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wave-protobuf-generated</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wave-communication</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   
   <build>
-    <sourceDirectory>${project.basedir}/../../proto_src</sourceDirectory>
+    <sourceDirectory>${project.basedir}/../../gen/messages/</sourceDirectory>
     
     <plugins>
       <plugin>

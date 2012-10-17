@@ -37,4 +37,5 @@ http://mojo.codehaus.org/gwt-maven-plugin/plugin-info.html
 Continuous Integration
 ----------
 
-This project is ![Built and tested on CloudBees](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png) . The public CI instance is available at [goodow.ci.cloudbees.com](https://goodow.ci.cloudbees.com/) .
+This project is ![Built and tested on CloudBees](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png) .
+The public CI instance is available at [goodow.ci.cloudbees.com](https://goodow.ci.cloudbees.com/) .

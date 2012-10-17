@@ -5,8 +5,8 @@
     <artifactId>moon-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>moon-api</artifactId>
-  <url>http://code.google.com/p/goodow/</url>
+  <artifactId>wave-api</artifactId>
+  <url>https://github.com/goodow/wave/</url>
   <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>

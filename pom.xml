@@ -7,11 +7,11 @@
     <groupId>com.goodow.moon</groupId>
     <artifactId>moon-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>maven/moon-parent/</relativePath>
+    <relativePath>maven/</relativePath>
   </parent>
-  <artifactId>moon-wave</artifactId>
+  <artifactId>wave-all</artifactId>
   <packaging>jar</packaging>
-  <url>http://code.google.com/p/goodow/</url>
+  <url>https://github.com/goodow/wave/</url>
   <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>
@@ -81,7 +81,6 @@
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
-
     <!-- <dependency> <groupId>com.google.guava</groupId> <artifactId>guava-gwt</artifactId> 
       </dependency> -->
 
@@ -95,6 +94,26 @@
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-servlet</artifactId>
       <version>${guice.version}</version>
+    </dependency>
+    
+    <!-- Internal modules -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wave-gxp-generated</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wave-pst-generated</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+      <exclusions>
+        <exclusion>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>wave-communication</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Miscellaneous -->
@@ -124,16 +143,6 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gxp</groupId>
-      <artifactId>google-gxp</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>com.google.api-client</groupId>
@@ -325,26 +334,6 @@
     <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
 
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>add-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.basedir}/proto_src</source>
-                <source>${project.basedir}/gen/messages</source>
-                <source>${project.basedir}/gen/gxp</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
