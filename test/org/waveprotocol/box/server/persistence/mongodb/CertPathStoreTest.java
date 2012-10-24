@@ -17,11 +17,10 @@
 
 package org.waveprotocol.box.server.persistence.mongodb;
 
-import org.junit.Ignore;
+import com.mongodb.DB;
+
 import org.waveprotocol.box.server.persistence.CertPathStoreTestBase;
 import org.waveprotocol.wave.crypto.CertPathStore;
-
-import com.mongodb.DB;
 
 /**
  * Testcase for the {@link CertPathStore} implementation in
@@ -30,7 +29,6 @@ import com.mongodb.DB;
  * @author ljvderijk@google.com (Lennard de Rijk)
  *
  */
-@Ignore
 public class CertPathStoreTest extends CertPathStoreTestBase {
 
   private static final String TEST_DATABASE = "CertPathTest";

@@ -17,11 +17,10 @@
 
 package org.waveprotocol.box.server.persistence.mongodb;
 
-import org.junit.Ignore;
+import com.mongodb.DB;
+
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.AccountStoreTestBase;
-
-import com.mongodb.DB;
 
 /**
  * Testcases for the {@link MongoDbStore} implementation of the
@@ -29,7 +28,6 @@ import com.mongodb.DB;
  *
  * @author ljvderijk@google.com (Lennard de Rijk)
  */
-@Ignore
 public class AccountStoreTest extends AccountStoreTestBase {
   private static final String TEST_DATABASE = "AttachmentTest";
 

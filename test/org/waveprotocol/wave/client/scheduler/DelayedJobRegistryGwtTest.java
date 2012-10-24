@@ -17,11 +17,10 @@
 
 package org.waveprotocol.wave.client.scheduler;
 
-import org.junit.Ignore;
+import com.google.gwt.junit.client.GWTTestCase;
+
 import org.waveprotocol.wave.client.scheduler.Scheduler.Priority;
 import org.waveprotocol.wave.client.scheduler.Scheduler.Schedulable;
-
-import com.google.gwt.junit.client.GWTTestCase;
 
 /**
  * Invasive test for one of the scheduler's data structures.
@@ -29,7 +28,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class DelayedJobRegistryGwtTest extends GWTTestCase {
 
   public void testDelayedJobRegistry() {

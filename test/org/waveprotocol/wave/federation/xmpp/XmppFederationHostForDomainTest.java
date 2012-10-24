@@ -21,25 +21,24 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
+import com.google.protobuf.ByteString;
 
 import junit.framework.TestCase;
 
-import org.junit.Ignore;
-import org.waveprotocol.wave.federation.FederationErrorProto.FederationError;
-import org.waveprotocol.wave.federation.Proto.ProtocolHashedVersion;
 import org.waveprotocol.wave.federation.ProtocolHashedVersionFactory;
 import org.waveprotocol.wave.federation.WaveletFederationListener;
+import org.waveprotocol.wave.federation.FederationErrorProto.FederationError;
+import org.waveprotocol.wave.federation.Proto.ProtocolHashedVersion;
 import org.waveprotocol.wave.federation.xmpp.MockDisco.PendingMockDisco;
-import org.waveprotocol.wave.model.id.URIEncoderDecoder.EncodingException;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.id.WaveletName;
+import org.waveprotocol.wave.model.id.URIEncoderDecoder.EncodingException;
 import org.xmpp.packet.Packet;
 
-import com.google.protobuf.ByteString;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * Tests for {@link XmppFederationHostForDomain}.
@@ -48,7 +47,6 @@ import com.google.protobuf.ByteString;
  * @author thorogood@google.com (Sam Thorogood)
  */
 
-@Ignore
 public class XmppFederationHostForDomainTest extends TestCase {
 
   private final static String LOCAL_DOMAIN = "acmewave.com";

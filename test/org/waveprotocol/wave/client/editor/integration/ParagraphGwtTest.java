@@ -17,8 +17,8 @@
 
 package org.waveprotocol.wave.client.editor.integration;
 
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.content.paragraph.Paragraph;
+
 import org.waveprotocol.wave.model.document.util.LineContainers;
 import org.waveprotocol.wave.model.operation.OperationException;
 
@@ -27,7 +27,6 @@ import org.waveprotocol.wave.model.operation.OperationException;
  *
  */
 
-@Ignore
 public class ParagraphGwtTest extends ElementTestBase {
 
   /**

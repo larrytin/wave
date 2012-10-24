@@ -17,8 +17,6 @@
 
 package org.waveprotocol.wave.client.util;
 
-import org.junit.Ignore;
-
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -26,7 +24,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  *
  */
 
-@Ignore
 public class WrappedJSObjectGwtTest extends GWTTestCase {
 
   @Override

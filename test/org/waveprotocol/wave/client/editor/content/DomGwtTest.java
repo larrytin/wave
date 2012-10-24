@@ -16,8 +16,8 @@
  */
 package org.waveprotocol.wave.client.editor.content;
 
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.testing.TestEditors;
+
 import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
 
 /**
@@ -26,7 +26,6 @@ import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class DomGwtTest extends ContentTestBase {
 
   public void testDomElementManipulations() {

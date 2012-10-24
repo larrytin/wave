@@ -16,21 +16,20 @@
  */
 package org.waveprotocol.wave.client.editor.extract;
 
-import org.junit.Ignore;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.junit.client.GWTTestCase;
 import org.waveprotocol.wave.client.editor.content.ContentDocument;
 import org.waveprotocol.wave.client.editor.content.ContentElement;
 import org.waveprotocol.wave.client.editor.content.ContentNode;
 import org.waveprotocol.wave.client.editor.content.ContentRawDocument;
 import org.waveprotocol.wave.client.editor.content.ContentTextNode;
 import org.waveprotocol.wave.client.editor.testing.TestEditors;
+
 import org.waveprotocol.wave.model.document.ReadableDocument;
 import org.waveprotocol.wave.model.document.util.Point;
 import org.waveprotocol.wave.model.document.util.Point.El;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
-import com.google.gwt.junit.client.GWTTestCase;
 
 /**
  * Test the repairer
@@ -42,7 +41,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class RepairerGwtTest extends GWTTestCase {
   ContentRawDocument c = null;
   Repairer r = null;

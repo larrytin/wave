@@ -16,7 +16,10 @@
  */
 package org.waveprotocol.wave.client.editor.impl;
 
-import org.junit.Ignore;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Text;
+import com.google.gwt.junit.client.GWTTestCase;
 import org.waveprotocol.wave.client.editor.content.ContentDocument;
 import org.waveprotocol.wave.client.editor.content.ContentElement;
 import org.waveprotocol.wave.client.editor.content.ContentNode;
@@ -25,12 +28,8 @@ import org.waveprotocol.wave.client.editor.content.ContentTextNode;
 import org.waveprotocol.wave.client.editor.extract.InconsistencyException.HtmlInserted;
 import org.waveprotocol.wave.client.editor.extract.InconsistencyException.HtmlMissing;
 import org.waveprotocol.wave.client.editor.testing.TestEditors;
-import org.waveprotocol.wave.model.document.util.Point;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Text;
-import com.google.gwt.junit.client.GWTTestCase;
+import org.waveprotocol.wave.model.document.util.Point;
 
 /**
  * Tests our mapping logic from HTML to wrapper nodes.
@@ -38,7 +37,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class NodeManagerGwtTest extends GWTTestCase {
   ContentRawDocument c = null;
   NodeManager m = null;

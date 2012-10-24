@@ -17,7 +17,8 @@
 
 package org.waveprotocol.wave.client.editor.integration;
 
-import org.junit.Ignore;
+import com.google.gwt.junit.client.GWTTestCase;
+
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorImpl;
 import org.waveprotocol.wave.client.editor.EditorSettings;
@@ -40,13 +41,10 @@ import org.waveprotocol.wave.client.widget.popup.PopupChromeProvider;
 import org.waveprotocol.wave.client.widget.popup.simple.Popup;
 import org.waveprotocol.wave.model.document.util.DocHelper;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
 /**
  *
  * @author danilatos@google.com (Daniel Danilatos)
  */
-@Ignore
 public class CleanupGwtTest extends GWTTestCase {
 
   @Override

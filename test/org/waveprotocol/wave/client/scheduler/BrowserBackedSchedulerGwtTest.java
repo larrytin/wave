@@ -17,12 +17,8 @@
 
 package org.waveprotocol.wave.client.scheduler;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
+import com.google.gwt.junit.client.GWTTestCase;
 
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.scheduler.Scheduler.IncrementalTask;
 import org.waveprotocol.wave.client.scheduler.Scheduler.Listener;
 import org.waveprotocol.wave.client.scheduler.Scheduler.Priority;
@@ -30,7 +26,10 @@ import org.waveprotocol.wave.client.scheduler.Scheduler.Schedulable;
 import org.waveprotocol.wave.client.scheduler.testing.FakeSimpleTimer;
 import org.waveprotocol.wave.model.util.Pair;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Test case for BrowserBackedScheduler
@@ -42,7 +41,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class BrowserBackedSchedulerGwtTest extends GWTTestCase {
 
   /** Usable priorities (excludes {@link Priority#INTERNAL_SUPPRESS}) */

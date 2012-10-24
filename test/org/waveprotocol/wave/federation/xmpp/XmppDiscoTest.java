@@ -25,26 +25,25 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import com.google.common.collect.Lists;
 
 import junit.framework.TestCase;
 
 import org.dom4j.Element;
-import org.joda.time.DateTimeUtils;
-import org.junit.Ignore;
 import org.xmpp.packet.IQ;
 import org.xmpp.packet.Packet;
 import org.xmpp.packet.PacketError;
+import org.joda.time.DateTimeUtils;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Tests for the {@link XmppDisco} class. Also provides coverage over
  * {@link RemoteDisco} which is used internally by XmppDisco.
  */
 
-@Ignore
+
 public class XmppDiscoTest extends TestCase {
   private static final String LOCAL_DOMAIN = "something.com";
   private static final String LOCAL_JID = "wave." + LOCAL_DOMAIN;

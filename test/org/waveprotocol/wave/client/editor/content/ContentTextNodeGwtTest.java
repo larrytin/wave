@@ -17,12 +17,10 @@
 
 package org.waveprotocol.wave.client.editor.content;
 
-import org.junit.Ignore;
-import org.waveprotocol.wave.client.editor.extract.InconsistencyException.HtmlMissing;
-import org.waveprotocol.wave.client.editor.testing.TestEditors;
-
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Text;
+import org.waveprotocol.wave.client.editor.extract.InconsistencyException.HtmlMissing;
+import org.waveprotocol.wave.client.editor.testing.TestEditors;
 
 /**
  * Tests for ContentTextNode behaviour
@@ -30,7 +28,6 @@ import com.google.gwt.dom.client.Text;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class ContentTextNodeGwtTest extends ContentTestBase {
 
   public void testContentDataInitialisedFromNodelet() {

@@ -22,10 +22,9 @@ import static org.waveprotocol.wave.client.editor.testing.FakeUser.move;
 import static org.waveprotocol.wave.client.editor.testing.FakeUser.split;
 import static org.waveprotocol.wave.client.editor.testing.FakeUser.type;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Ignore;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.Text;
+import com.google.gwt.junit.client.GWTTestCase;
 import org.waveprotocol.wave.client.editor.content.ContentDocument;
 import org.waveprotocol.wave.client.editor.content.ContentElement;
 import org.waveprotocol.wave.client.editor.content.ContentNode;
@@ -42,11 +41,11 @@ import org.waveprotocol.wave.client.scheduler.Scheduler.IncrementalTask;
 import org.waveprotocol.wave.client.scheduler.Scheduler.Schedulable;
 import org.waveprotocol.wave.client.scheduler.Scheduler.Task;
 import org.waveprotocol.wave.client.scheduler.TimerService;
+
 import org.waveprotocol.wave.model.document.util.Point;
 
-import com.google.gwt.dom.client.Node;
-import com.google.gwt.dom.client.Text;
-import com.google.gwt.junit.client.GWTTestCase;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Test the logic of the typing extractor.
@@ -54,7 +53,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class TypingExtractorGwtTest extends GWTTestCase {
 
   /** {@inheritDoc} */

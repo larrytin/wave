@@ -17,12 +17,6 @@
 package org.waveprotocol.wave.client.editor.content;
 
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.testing.TestEditors;
 import org.waveprotocol.wave.model.document.ReadableDocument;
 import org.waveprotocol.wave.model.document.operation.DocOp;
@@ -36,13 +30,17 @@ import org.waveprotocol.wave.model.document.util.Point;
 import org.waveprotocol.wave.model.document.util.ReadableTreeWalker;
 import org.waveprotocol.wave.model.operation.SilentOperationSink;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 /**
  * Tests some transparent/persistent operations on a ContentDocument
  *
  * @author patcoleman@google.com (Pat Coleman)
  */
 
-@Ignore
 public class LazyPersistentContentDocumentGwtTest extends EditorGwtTestCase {
   /** Simplest use of persistence, creating a node locally then persisting it. */
   public void testSimpleForcedPersist() {

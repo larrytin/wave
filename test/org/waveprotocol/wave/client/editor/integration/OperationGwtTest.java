@@ -17,7 +17,6 @@
 
 package org.waveprotocol.wave.client.editor.integration;
 
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.debug.logger.LogLevel;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorTestingUtil;
@@ -34,7 +33,6 @@ import org.waveprotocol.wave.model.operation.OperationRuntimeException;
  *
  */
 
-@Ignore
 public class OperationGwtTest extends TestBase {
   /**
    * Tests that applying an operation results in correct

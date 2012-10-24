@@ -27,35 +27,34 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.google.protobuf.ByteString;
 
 import junit.framework.TestCase;
 
 import org.dom4j.Element;
-import org.junit.Ignore;
 import org.mockito.ArgumentCaptor;
+import org.waveprotocol.wave.federation.ProtocolHashedVersionFactory;
+import org.waveprotocol.wave.federation.WaveletFederationListener;
+import org.waveprotocol.wave.federation.WaveletFederationProvider;
 import org.waveprotocol.wave.federation.FederationErrorProto.FederationError;
 import org.waveprotocol.wave.federation.Proto.ProtocolHashedVersion;
 import org.waveprotocol.wave.federation.Proto.ProtocolSignedDelta;
 import org.waveprotocol.wave.federation.Proto.ProtocolSignerInfo;
-import org.waveprotocol.wave.federation.ProtocolHashedVersionFactory;
-import org.waveprotocol.wave.federation.WaveletFederationListener;
 import org.waveprotocol.wave.federation.WaveletFederationListener.WaveletUpdateCallback;
-import org.waveprotocol.wave.federation.WaveletFederationProvider;
 import org.waveprotocol.wave.federation.WaveletFederationProvider.DeltaSignerInfoResponseListener;
 import org.waveprotocol.wave.federation.WaveletFederationProvider.HistoryResponseListener;
 import org.waveprotocol.wave.federation.WaveletFederationProvider.PostSignerInfoResponseListener;
 import org.waveprotocol.wave.federation.WaveletFederationProvider.SubmitResultListener;
-import org.waveprotocol.wave.model.id.URIEncoderDecoder.EncodingException;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.id.WaveletName;
+import org.waveprotocol.wave.model.id.URIEncoderDecoder.EncodingException;
 import org.xmpp.packet.IQ;
 import org.xmpp.packet.Message;
 import org.xmpp.packet.PacketError;
 
-import com.google.common.collect.ImmutableList;
-import com.google.protobuf.ByteString;
+import java.util.List;
 
 /**
  * Tests for {@link XmppFederationRemote}.
@@ -67,7 +66,6 @@ import com.google.protobuf.ByteString;
  * @author thorogood@google.com (Sam Thorogood)
  */
 
-@Ignore
 public class XmppFederationRemoteTest extends TestCase {
 
   private final static String LOCAL_DOMAIN = "acmewave.com";

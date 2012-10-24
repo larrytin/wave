@@ -17,9 +17,14 @@
 
 package org.waveprotocol.wave.client.editor.gwt;
 
-import java.util.Collections;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.Editor;
 import org.waveprotocol.wave.client.editor.EditorImpl;
 import org.waveprotocol.wave.client.editor.content.AgentAdapter;
@@ -29,19 +34,12 @@ import org.waveprotocol.wave.client.editor.content.ContentRawDocument;
 import org.waveprotocol.wave.client.editor.gwt.GwtRenderingMutationHandler.Flow;
 import org.waveprotocol.wave.client.editor.testing.TestEditors;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
+import java.util.Collections;
 
 /**
  * @author danilatos@google.com (Daniel Danilatos)
  */
 
-@Ignore
 public class GwtRenderingMutationHandlerGwtTest extends GWTTestCase {
 
   private ContentDocument doc;

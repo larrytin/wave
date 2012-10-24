@@ -16,15 +16,14 @@
  */
 package org.waveprotocol.wave.client.wavepanel.block.xml;
 
-import org.junit.Ignore;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.junit.client.GWTTestCase;
+
 import org.waveprotocol.wave.client.wavepanel.block.BlockStructureTestBase;
 import org.waveprotocol.wave.client.wavepanel.view.ModelIdMapperImpl;
 import org.waveprotocol.wave.client.wavepanel.view.ViewIdMapper;
 import org.waveprotocol.wave.model.conversation.ConversationView;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
 
 /**
  * Wraps an {@link BlockStructureTestBase}, and runs it against an
@@ -32,7 +31,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  *
  */
 
-@Ignore
 public class XmlStructureGwtTest extends GWTTestCase {
   @Override
   public String getModuleName() {

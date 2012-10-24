@@ -17,15 +17,12 @@
 
 package org.waveprotocol.wave.client.editor.content;
 
-import org.junit.Ignore;
 import org.waveprotocol.wave.client.editor.extract.InconsistencyException.HtmlMissing;
 import org.waveprotocol.wave.client.editor.testing.TestEditors;
 
 /**
  * @author danilatos@google.com (Daniel Danilatos)
  */
-
-@Ignore
 public class ContentElementGwtTest extends ContentTestBase {
 
   public void testImplDataSumsTextNodes() throws HtmlMissing {
