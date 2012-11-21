@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.goodow.wave</groupId>
+    <artifactId>wave-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>wave-model</artifactId>
+  <url>https://github.com/goodow/wave/</url>
+  <inceptionYear>2012</inceptionYear>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <sourceDirectory>${project.basedir}/../../src</sourceDirectory>
+    
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>org/waveprotocol/wave/model/**</include>
+          </includes>
+          <excludes>
+            <exclude>org/waveprotocol/wave/model/testing/GenericGWTTestBase.java</exclude>
+            <exclude>org/waveprotocol/wave/model/testing/OpMatchers.java</exclude>
+            <exclude>org/waveprotocol/wave/model/testing/Response.java</exclude>
+            <exclude>org/waveprotocol/wave/model/experimental/schema/**</exclude>
+            <exclude>org/waveprotocol/wave/model/version/HashedVersionFactoryImpl.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>org/waveprotocol/wave/model/**</include>
+          </includes>
+          <excludes>
+            <exclude>org/waveprotocol/wave/model/testing/GenericGWTTestBase.java</exclude>
+            <exclude>org/waveprotocol/wave/model/testing/OpMatchers.java</exclude>
+            <exclude>org/waveprotocol/wave/model/testing/Response.java</exclude>
+            <exclude>org/waveprotocol/wave/model/experimental/schema/**</exclude>
+            <exclude>org/waveprotocol/wave/model/version/HashedVersionFactoryImpl.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

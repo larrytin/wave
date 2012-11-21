@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.goodow.moon</groupId>
-    <artifactId>moon-parent</artifactId>
+    <groupId>com.goodow.wave</groupId>
+    <artifactId>wave-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>moon-communication</artifactId>
-  <url>http://code.google.com/p/goodow/</url>
+  <artifactId>wave-communication</artifactId>
+  <url>https://github.com/goodow/wave/</url>
   <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>
